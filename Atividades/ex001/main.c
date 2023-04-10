@@ -9,9 +9,9 @@ int main(int argc, char const *argv[]){
     printf("Valor para calcular: ");
     scanf("%d",&x);
 
-    printf("\n O sucessor é %d", sucessor(x));
+    printf("\n O sucessor ï¿½ %d", sucessor(x));
 
-    printf("\n O antecessor é %d", antecessor(x));
+    printf("\n O antecessor ï¿½ %d", antecessor(x));
 
     return 0;
 }
