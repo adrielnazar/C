@@ -11,7 +11,7 @@ int main(void)
 {
     setlocale(LC_ALL, "Portuguese");
     estudantes aluno;
-    int i, retorno = 0;
+    int i, m, retorno = 0;
 
 
     for ( i = 1; i < 11; i++) {
@@ -24,6 +24,13 @@ int main(void)
             printf("Digite a matricula do %dº aluno: ", i);
             fflush(stdin);
             retorno = scanf("%d", &aluno.matricula[i]);
+            for(m=1; m < i; m++)
+            {
+            	if(aluno.matricula[m] == aluno.matricula[i])
+            	{
+            		retorno = 0;
+				}
+			}
             if (retorno == 0 || aluno.matricula[i] <= 0 || aluno.matricula[i] >= 100000000)
             {
                 system("cls");

@@ -8,7 +8,7 @@ typedef struct {
 
 int main(int argc, char const *argv[])
 {
-    int i, retorno = -1;
+    int i, m, retorno = -1;
     setlocale(LC_ALL, "Portuguese");
     aluno Estudante;
 
@@ -25,6 +25,13 @@ int main(int argc, char const *argv[])
             printf("Escreva a matricula do %dº aluno: ", i);
             fflush(stdin);
             retorno = scanf("%d", &Estudante.matricula[i]);
+            for(m=1; m < i; m++)
+            {
+            	if(Estudante.matricula[m] == Estudante.matricula[i])
+            	{
+            		retorno = 0;
+				}
+			}
             if (retorno == 0 || Estudante.matricula[i] <=0 || Estudante.matricula[i] >= 100000000)
                 {
                     system("cls");
