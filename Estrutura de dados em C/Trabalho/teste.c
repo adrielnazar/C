@@ -1,153 +1,176 @@
 #include <stdio.h>
-#include <time.h>
 #include <locale.h>
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
-
-typedef struct{
-    int dia, mes, ano;
-}Date;
-
 
 typedef struct {
-    Date dataNac;
-    long long int CPF;
-    int idade, codigoSet;
-    char nome[50], sexo, cargoOcup[30];
-    float salario;
-}empregado;
+    int matricula[5];
+    char nome[5][50];
+    float nota1[5], nota2[5], nota3[5], mediaM[5], mediam[5];
+}estudantes;
 
 int main(void)
 {
     setlocale(LC_ALL, "Portuguese");
-    empregado funcionario;
-    int retorno = 0;
+    estudantes aluno;
+    int i, x, m, retorno = 0, maiormed[5], menormed[6], maiorn1[5], contmn1 = 0, contmaiormed = 0 ;
+    long long contmenormed = 0;
+    maiorn1[1]=maiormed[1]=1;
+    menormed[1]=1;
+    aluno.nota1[maiorn1[1]]= -1;
+    aluno.mediam[menormed[1]]=11;
+    aluno.mediaM[maiormed[1]]=-1;
 
-    struct tm *data_hora_atual;
-    time_t segundos;
-    time(&segundos);
-    data_hora_atual = localtime(&segundos);
-    
 
-
-    printf("Digite o nome do Funcion√°rio: ");
-    fflush(stdin);
-    fgets(funcionario.nome, 50, stdin);
-    /*do
-    {
-        printf("Digite a idade do funcion√°rio: ");
+    for ( i = 1; i < 6; i++) {
+        printf("Digite o nome do %d∫ aluno: ", i);
         fflush(stdin);
-        retorno = scanf("%d", funcionario.idade);
-        if (retorno == 0 || funcionario.idade > 140 || funcionario.idade < 18);
+        fgets(aluno.nome[i], 50, stdin);
+        do
         {
-            system("cls");
-            printf("Escreva em um formato valido!\n");
-            retorno = 0;
-        }
-    } while (retorno == 0);*/
-    
-    do
-    {
-        printf("Digite o sexo do funcion√°rio no formato M/F: ");
-        fflush(stdin);
-        scanf("%c", &funcionario.sexo);
-        funcionario.sexo = toupper(funcionario.sexo);
-
-        retorno = 1;
+            printf("Digite a matricula do %d∫ aluno: ", i);
+            fflush(stdin);
+            retorno = scanf("%d", &aluno.matricula[i]);
+            for(m=1; m < i; m++)
+            {
+            	if(aluno.matricula[m] == aluno.matricula[i])
+            	{
+            		retorno = 0;
+				}
+			}
+            if (retorno == 0 || aluno.matricula[i] <= 0 || aluno.matricula[i] >= 100000000)
+            {
+                system("cls");
+                printf("Escreva em um formato valido!\n");
+                retorno = 0;
+            }
+            
+        } while (retorno == 0);
         
-
-        if (funcionario.sexo != 'M' && funcionario.sexo != 'F' && funcionario.sexo != 'm' && funcionario.sexo != 'f')
+        do
         {
-            system("cls");
-            printf("Escreva em um formato valido!\n");
-            retorno = 0;
-        }
-    } while (retorno == 0);
-
-    do
-    {
-        printf("Digite o CPF do funcion√°rio: ");
-        fflush(stdin);
-        retorno = scanf("%lld", &funcionario.CPF);
+            printf("Digite a primeira nota do %d∫ aluno: ", i);
+            fflush(stdin);
+            retorno = scanf("%f", &aluno.nota1[i]);
+            if (retorno == 0 || aluno.nota1[i] < 0 || aluno.nota1[i] > 10)
+            {
+                system("cls");
+                printf("Escreva em um formato valido!\n");
+                retorno = 0;
+            }
+            
+        } while (retorno == 0);
+            
+        do
+        {
+            printf("Digite a segunda nota do %d∫ aluno: ", i);
+            fflush(stdin);
+            retorno = scanf("%f", &aluno.nota2[i]);
+            if (retorno == 0 || aluno.nota2[i] < 0 || aluno.nota2[i] > 10)
+            {
+                system("cls");
+                printf("Escreva em um formato valido!\n");
+                retorno = 0;
+            }
+            
+        } while (retorno == 0);
         
-        if (retorno == 0 || funcionario.CPF > 99999999999 || funcionario.CPF < 9999999999)
+        do
         {
-            system("cls");
-            printf("Escreva em um formato valido!\n");
-            retorno = 0;
-        }
-    } while (retorno == 0);
+            printf("Digite a terceira nota do %d∫ aluno: ", i);
+            fflush(stdin);
+            retorno = scanf("%f", &aluno.nota3[i]);
+            if (retorno == 0 || aluno.nota3[i] < 0 || aluno.nota3[i] > 10)
+            {
+                system("cls");
+                printf("Escreva em um formato valido!\n");
+                retorno = 0;
+            }
+        } while (retorno == 0);
+        system("cls");
 
 
-    do
-    {
-        printf("Digite a data de nacimento do Funcion√°rio no formato dd mm aaaa: ");
-        fflush(stdin);
-        retorno = scanf("%d%d%d", &funcionario.dataNac.dia, &funcionario.dataNac.mes, &funcionario.dataNac.ano);
-        
-        if (retorno == 0 || funcionario.dataNac.dia > 31 || funcionario.dataNac.dia < 1 || funcionario.dataNac.mes > 12 ||
-        funcionario.dataNac.mes < 1 || funcionario.dataNac.ano > 2006 || funcionario.dataNac.ano < 1898)
-        {
-            system("cls");
-            printf("Escreva em um formato valido!\n");
-            retorno = 0;
+        aluno.mediaM[i] = aluno.mediam[i] = (aluno.nota1[i] + aluno.nota2[i] + aluno.nota3[i])/3; 
+
+        if (aluno.nota1[i] >= aluno.nota1[maiorn1[1]]){
+            if (aluno.nota1[i] == aluno.nota1[maiorn1[1]])
+            {
+                contmn1++;
+            }else{
+                contmn1=1;
+                for (x = 1; x < 6; x++)
+                {
+                    maiorn1[x] = 0;
+                }
+            }
+            maiorn1[contmn1] = i;
+        };
+
+        if (aluno.mediaM[i] >= aluno.mediaM[maiormed[1]]){
+            if (aluno.mediaM[i] == aluno.mediaM[maiormed[1]])
+            {
+                contmaiormed++;
+            }else{
+                contmaiormed=1;
+                for (x = 1; x < 6; x++)
+                {
+                    maiormed[x] = 0;
+                }
+            }
+            maiormed[contmaiormed] = i;
         }
-        
-    } while (retorno == 0);
-    
-    funcionario.idade = (data_hora_atual->tm_year+1900) - funcionario.dataNac.ano;
-    if (funcionario.dataNac.mes > data_hora_atual->tm_mon)
-    {
-        funcionario.idade++;
-    }else if (funcionario.dataNac.mes == data_hora_atual->tm_mon)
-    {
-        if (funcionario.dataNac.dia >= data_hora_atual->tm_mday)
-        {
-            funcionario.idade++;
-        }   
+
+        if (aluno.mediam[i] <= aluno.mediam[menormed[1]]){
+            
+            if (aluno.mediam[i] == aluno.mediam[menormed[1]])
+            {
+                contmenormed++;
+            }else{
+                contmenormed=1;
+                for (x = 1; x < 6; x++)
+                {
+                    menormed[x] = 0;
+                }
+            }
+            menormed[contmenormed] = i;
+        }    
+
+        printf("%lld contmenormed \n",contmenormed);
     }
 
-    do
+    printf("\n\n        --Alunos cadastrados no banco de dados--\n\n");
+
+    for ( i = 1; i < 6; i++)
     {
-        printf("Digite o C√≥digo do sertor do funcion√°rio (Entre: 0-99): ");
-        fflush(stdin);
-        retorno = scanf("%d", &funcionario.codigoSet);
-        
-        if (retorno == 0 || funcionario.codigoSet > 99 || funcionario.codigoSet < 0)
+        printf("Aluno: %sMatrÌcula: %d\nPrimeira nota: %.1f\nSegunda nota: %.1f\nTesceira nota: %.1f\nMÈdia: %.1f\n", 
+        aluno.nome[i], aluno.matricula[i], aluno.nota1[i], aluno.nota2[i], aluno.nota3[i], aluno.mediaM[i]);
+        if (aluno.mediaM[i] >= 6)
         {
-            system("cls");
-            printf("Escreva em um formato valido!\n");
-            retorno = 0;
+            printf("Aluno Aprovado!\n\n");
+        } else
+        {
+            printf("Aluno Reprovado!\n\n");
         }
-    } while (retorno == 0);
+    }
 
-    printf("Digite o cargo ocupado pelo Funcion√°rio: ");
-    fflush(stdin);
-    fgets(funcionario.cargoOcup, 30, stdin);
-
-    do
+    printf("Alunos com maior primeira nota: \n");
+    for (x = 1; x <= contmn1; x++)
     {
-        printf("Digite o Sal√°rio do funcion√°rio: ");
-        fflush(stdin);
-        retorno = scanf("%f", &funcionario.salario);
+        printf("Aluno: %sMatrÌcula: %d\nPrimeira nota: %.1f\n\n", 
+        aluno.nome[maiorn1[x]], aluno.matricula[maiorn1[x]], aluno.nota1[maiorn1[x]]);
+    }
+
+    printf("Alunos com maior mÈdia nas notas: \n");
+    for (x = 1; x <= contmaiormed; x++)
+    {
+        printf("Aluno: %sMatrÌcula: %d\nMÈdia: %.1f\n\n", 
+        aluno.nome[maiormed[x]], aluno.matricula[maiormed[x]], aluno.mediaM[maiormed[x]]);
+    }
+
+    printf("Alunos com menor mÈdia nas notas: \n");
+    for (x = 1; x <= contmenormed; x++)
+    {
         
-        if (retorno == 0 || funcionario.salario > 99999999 || funcionario.salario < 0)
-        {
-            system("cls");
-            printf("Escreva em um formato valido!\n");
-            retorno = 0;
-        }
-    } while (retorno == 0);
-
-
-
-        
-    printf("\n\n        --Dados do funcionario no banco de dados--\n\n");
-
-    printf("Nome: %sIdade: %d\nSexo: %c\nCPF: %lld\nData de nacimento: %d/%d/%d\nC√≥digo do setor: %d\nCargo Ocupado: %sSal√°rio: %.2f",
-    funcionario.nome, funcionario.idade , funcionario.sexo, funcionario.CPF, funcionario.dataNac.dia, 
-    funcionario.dataNac.mes, funcionario.dataNac.ano, funcionario.codigoSet, funcionario.cargoOcup, funcionario.salario);
-
+        printf("Aluno: %sMatrÌcula: %d\nMÈdia: %.1f\n\n", 
+        aluno.nome[menormed[x]], aluno.matricula[menormed[x]], aluno.mediam[menormed[x]]);
+    }
     return 0;
 }

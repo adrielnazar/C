@@ -3,27 +3,27 @@
 
 typedef struct {
     int matricula[5];
-    char nome[5][50];
     float nota1[5], nota2[5], nota3[5], mediaM[5], mediam[5];
+    char nome[8][50];
 }estudantes;
 
 int main(void)
 {
     setlocale(LC_ALL, "Portuguese");
     estudantes aluno;
-    int i, x, m, retorno = 0, maiormed[5], menormed[6], maiorn1[5], contmn1 = 1, contmaiormed = 1, contmenormed = 1;
-    maiorn1[1]=maiormed[1]=-1;
-    menormed[1]=-1;
-    aluno.nota1[maiorn1[1]]= 0;
+    int i, x, m, retorno = 0, maiormed[5], menormed[6], maiorn1[5], contmn1 = 0, contmaiormed = 0 ;
+    long long int contmenormed = 0;
+    maiorn1[1]=maiormed[1]=1;
+    menormed[1]=1;
+    aluno.nota1[maiorn1[1]]= -1;
     aluno.mediam[menormed[1]]=11;
     aluno.mediaM[maiormed[1]]=-1;
 
 
     for ( i = 1; i < 6; i++) {
-        
         printf("Digite o nome do %dº aluno: ", i);
         fflush(stdin);
-        fgets(aluno.nome[i], 50, stdin);
+        fgets(aluno.nome[i], 150, stdin);
         do
         {
             printf("Digite a matricula do %dº aluno: ", i);
@@ -85,6 +85,7 @@ int main(void)
                 retorno = 0;
             }
         } while (retorno == 0);
+        
         system("cls");
 
 
@@ -96,7 +97,7 @@ int main(void)
                 contmn1++;
             }else{
                 contmn1=1;
-                for (x = 0; x < 6; x++)
+                for (x = 1; x < 6; x++)
                 {
                     maiorn1[x] = 0;
                 }
@@ -110,7 +111,7 @@ int main(void)
                 contmaiormed++;
             }else{
                 contmaiormed=1;
-                for (x = 0; x < 6; x++)
+                for (x = 1; x < 6; x++)
                 {
                     maiormed[x] = 0;
                 }
@@ -125,7 +126,7 @@ int main(void)
                 contmenormed++;
             }else{
                 contmenormed=1;
-                for (x = 0; x < 6; x++)
+                for (x = 1; x < 6; x++)
                 {
                     menormed[x] = 0;
                 }
@@ -148,27 +149,27 @@ int main(void)
             printf("Aluno Reprovado!\n\n");
         }
     }
-    
-    printf("Alunos com maior primeira nota: \n");
+
+    printf("Alunos com maior primeira nota: \n\n");
     for (x = 1; x <= contmn1; x++)
     {
         printf("Aluno: %sMatrícula: %d\nPrimeira nota: %.1f\n\n", 
         aluno.nome[maiorn1[x]], aluno.matricula[maiorn1[x]], aluno.nota1[maiorn1[x]]);
     }
 
-    printf("Alunos com maior média nas notas: \n");
+    printf("Alunos com maior média nas notas: \n\n");
     for (x = 1; x <= contmaiormed; x++)
     {
         printf("Aluno: %sMatrícula: %d\nMédia: %.1f\n\n", 
         aluno.nome[maiormed[x]], aluno.matricula[maiormed[x]], aluno.mediaM[maiormed[x]]);
     }
 
-    printf("Alunos com menor média nas notas: \n");
+    printf("Alunos com menor média nas notas: \n\n");
     for (x = 1; x <= contmenormed; x++)
     {
+        
         printf("Aluno: %sMatrícula: %d\nMédia: %.1f\n\n", 
         aluno.nome[menormed[x]], aluno.matricula[menormed[x]], aluno.mediam[menormed[x]]);
     }
     return 0;
 }
-

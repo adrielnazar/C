@@ -150,7 +150,6 @@ int main(void)
     printf("Nome: %sIdade: %d\nSexo: %c\nCPF: %lld\nData de nacimento: %d/%d/%d\nCódigo do setor: %d\nCargo Ocupado: %sSalário: %.2f",
     funcionario.nome, funcionario.idade , funcionario.sexo, funcionario.CPF, funcionario.dataNac.dia, 
     funcionario.dataNac.mes, funcionario.dataNac.ano, funcionario.codigoSet, funcionario.cargoOcup, funcionario.salario);
-    printf("\nDia atual %d\nMes atual %d\nAno atual %d\n", data_hora_atual->tm_mday, data_hora_atual->tm_mon+1, data_hora_atual->tm_year+1900);
 
     return 0;
 }
