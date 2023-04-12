@@ -12,7 +12,7 @@ typedef struct{
 typedef struct{
     Hora horario;
     Date data;
-    char texto[300]
+    char texto[300];
 }Informa;
 
 int main(int argc, char const *argv[])
